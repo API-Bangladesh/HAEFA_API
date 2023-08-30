@@ -282,7 +282,7 @@ class Station4CController extends Controller
             $query = HealthCenter::query();
             $query->select('HealthCenterId','HealthCenterCode','HealthCenterName');
             $query->when($keyword, function($query) use ($keyword){
-                $query->where('HealthCenterCode', 'LIKE', "%".$keyword."%");
+                $query->where('HealthCenterName', 'LIKE', "%".$keyword."%");
             });
 
             $query->when($limit, function($query) use($limit){
@@ -442,7 +442,7 @@ class Station4CController extends Controller
                 $MDataAdvice->CollectionDate = $DateTime;
                 $MDataAdvice->AdviceId = $Advice[$i]['adviceId'];
                 $MDataAdvice->Advice = $Advice[$i]['advice'];
-                $MDataAdvice->Status  = "A";
+                $MDataAdvice->Status  = $Advice[$i]['Status'];
                 $MDataAdvice->CreateDate  = $DateTime;
                 $MDataAdvice->CreateUser  = $Advice[$i]['CreateUser'];
                 $MDataAdvice->UpdateDate  = $DateTime;

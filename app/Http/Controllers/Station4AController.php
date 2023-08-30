@@ -14,6 +14,7 @@ use App\Models\MDataSocialBehavior;
 use App\Models\MDataVariousSymptom;
 use App\Models\MDataPatientCCDetails;
 use App\Models\MDataPatientIllnessHistory;
+use App\Models\MDataPastIllnessHistory;
 use Illuminate\Support\Facades\DB;
 use App\Models\RefSocialBehavior;
 use App\Models\MDataPhysicalExamGeneral;
@@ -110,10 +111,10 @@ class Station4AController extends Controller
                $PresentIll->CollectionDate = $DateTime;
                $PresentIll->IllnessId = $PresentIllness[$i]['illnessId'];
                $PresentIll->OtherIllness = $PresentIllness[$i]['otherIllness'];
-               $PresentIll->Status = 1;
+               $PresentIll->Status = $PresentIllness[$i]['Status'];
                $PresentIll->CreateUser = $PresentIllness[$i]['CreateUser'];
                $PresentIll->CreateDate = $DateTime;
-               $PresentIll->UpdateUser = "";
+               $PresentIll->UpdateUser = $PresentIllness[$i]['UpdateUser'];
                $PresentIll->UpdateDate =  $DateTime;
                $PresentIll->OrgId = $PresentIllness[$i]['OrgId'];
                $PresentIll->save();
@@ -122,16 +123,16 @@ class Station4AController extends Controller
             //Save Past illness
             $PastIllness = $request->PatientHOPastIllness;
             for($i=0;$i<count($PastIllness); $i++){
-                $PastIll = new MDataPatientIllnessHistory();
+                $PastIll = new MDataPastIllnessHistory();
                 $PastIll->MDPatientIllnessId = Str::uuid();
                 $PastIll->PatientId = $PastIllness[$i]['PatientId'];
                 $PastIll->CollectionDate = $DateTime;
                 $PastIll->IllnessId = $PastIllness[$i]['illnessId'];
                 $PastIll->OtherIllness = $PastIllness[$i]['otherIllness'];
-                $PastIll->Status = 2;
+                $PastIll->Status = $PastIllness[$i]['Status'];
                 $PastIll->CreateUser = $PastIllness[$i]['CreateUser'];
                 $PastIll->CreateDate = $DateTime;
-                $PastIll->UpdateUser = "";
+                $PastIll->UpdateUser = $PastIllness[$i]['UpdateUser'];
                 $PastIll->UpdateDate =  $DateTime;
                 $PastIll->OrgId = $PastIllness[$i]['OrgId'];
                 $PastIll->save();

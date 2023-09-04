@@ -399,6 +399,7 @@ class Station4CController extends Controller
                 $MDataTreatmentSuggestion->DurationId = $TreatmentSuggestion[$i]['durationId'];
                 $MDataTreatmentSuggestion->RefFrequencyId = $TreatmentSuggestion[$i]['frequencyId'];
                 $MDataTreatmentSuggestion->Frequency = $TreatmentSuggestion[$i]['frequency'];
+                $MDataTreatmentSuggestion->Hourly = $TreatmentSuggestion[$i]['hourly'];
                 $MDataTreatmentSuggestion->DrugDurationValue = $TreatmentSuggestion[$i]['drugDurationValue'];
                 $MDataTreatmentSuggestion->OtherDrug = $TreatmentSuggestion[$i]['otherDrug'];
                 $MDataTreatmentSuggestion->SpecialInstruction = $TreatmentSuggestion[$i]['specialInstruction'];

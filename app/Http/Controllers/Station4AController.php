@@ -399,7 +399,7 @@ class Station4AController extends Controller
 
     public function socialHistory(){
         try{
-            $data = RefSocialBehavior::select('SocialBehaviorId','SocialBehaviorCode')->orderBy('CreateDate','DESC')->get();
+            $data = RefSocialBehavior::select('SocialBehaviorId','SocialBehaviorCode')->orderBy('CreateDate','ASC')->get();
             $status = [
                 'code'=> 200,
                 'message' =>'Social history get successfully'

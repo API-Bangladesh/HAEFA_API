@@ -256,7 +256,7 @@ class Station4AController extends Controller
                 $MDataRxDetail->Dose = $MedicationTaken[$i]['dose'];
                 $MDataRxDetail->AllergyToMedication = $MedicationTaken[$i]['allergyToMedication'];
                 $MDataRxDetail->RxDurationValue = $MedicationTaken[$i]['doseValue'];
-                $MDataRxDetail->Status = "A";
+                $MDataRxDetail->Status = $MedicationTaken[$i]['Status'];
                 $MDataRxDetail->CreateUser = $MedicationTaken[$i]['CreateUser'];
                 $MDataRxDetail->CreateDate = $DateTime;
                 $MDataRxDetail->UpdateUser = "";
@@ -399,7 +399,7 @@ class Station4AController extends Controller
 
     public function socialHistory(){
         try{
-            $data = RefSocialBehavior::select('SocialBehaviorId','SocialBehaviorCode')->get();
+            $data = RefSocialBehavior::select('SocialBehaviorId','SocialBehaviorCode')->orderBy('CreateDate','DESC')->get();
             $status = [
                 'code'=> 200,
                 'message' =>'Social history get successfully'

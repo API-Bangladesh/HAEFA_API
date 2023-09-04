@@ -69,7 +69,7 @@ class PrescriptionPreviewController extends Controller
                 AS date) GROUP BY I.CreateDate ORDER BY I.CreateDate");
 
 
-        $Treatment= DB::select("SELECT MAX(T.Frequency) AS Frequency, MAX(T.DrugDurationValue) AS DrugDurationValue,MAX(T.OtherDrug) AS OtherDrug, MAX(Dr.DrugCode) AS DrugCode, MAX(Dr.DrugDose) AS DrugDose, MAX(Ins.InstructionInBangla) AS InstructionInBangla, CAST(T.CreateDate AS date) as CreateDate
+        $Treatment= DB::select("SELECT MAX(T.Frequency) AS Frequency, MAX(T.DrugDurationValue) AS DrugDurationValue,MAX(T.OtherDrug) AS OtherDrug,MAX(T.Hourly) AS Hourly, MAX(Dr.DrugCode) AS DrugCode, MAX(Dr.DrugDose) AS DrugDose, MAX(Ins.InstructionInBangla) AS InstructionInBangla, CAST(T.CreateDate AS date) as CreateDate
             FROM MDataTreatmentSuggestion as T
             INNER JOIN RefDrug as Dr on Dr.DrugId = T.DrugId
             INNER JOIN RefInstruction as Ins on Ins.RefInstructionId = T.RefInstructionId
@@ -192,7 +192,7 @@ class PrescriptionPreviewController extends Controller
 
         $PhysicalFindings= DB::select("SELECT PhysicalFinding, CreateDate FROM MDataPhysicalFinding WHERE PatientId = '$request->patientId'");
 
-        $RxTaken= DB::select("SELECT Rx, RxDurationValue, AllergyToMedication, Dose, FrequencyHour, CreateDate FROM MDataRxDetails WHERE PatientId = '$request->patientId'");
+        $RxTaken= DB::select("SELECT Rx, RxDurationValue, AllergyToMedication, Dose, FrequencyHour, Status, CreateDate FROM MDataRxDetails WHERE PatientId = '$request->patientId'");
 
 
         return response()->json([

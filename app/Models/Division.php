@@ -3,11 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\BarcodeFormat;
-class Upazila extends Model
+
+class Division extends Model
 {
-    protected $table = 'upazilas';
+    protected $table = 'divisions';
     public $timestamps = false;
 
+    
 }
-

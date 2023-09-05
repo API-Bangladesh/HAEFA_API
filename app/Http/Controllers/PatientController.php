@@ -18,6 +18,8 @@ use App\Models\Station;
 use App\Models\RegistrationCode;
 use App\Models\Union;
 use App\Models\BarcodeStatus;
+use App\Models\Division;
+use App\Models\Upazila;
 
 
 class PatientController extends Controller
@@ -69,9 +71,25 @@ class PatientController extends Controller
         }  
         return $this->responseJson(false, HttpResponse::HTTP_BAD_GATEWAY, 'Error. Could Not Sava Patient data');
     }
+    // public function division(){
+    //     try{
+    //         $Division = Division::select('id','name')->get();
+    //         $status = [
+    //             'code' => 200,
+    //             'message' => 'Division Information Successfully'
+    //         ];
+    //         return response()->json([
+    //             'status' => $status,
+    //             'Division' => $Division,
+    //         ]);
+    //     }catch (Exception $e) {
+    //         throw new Exception($e->getMessage());
+    //     }  
+    //     return $this->responseJson(false, HttpResponse::HTTP_BAD_GATEWAY, 'Error. Could Not Sava Patient data');
+    // }
     public function district(){
         try{
-            $District = District::select('Id','districtName')->get();
+            $District = District::select('id','name')->get();
             $status = [
                 'code' => 200,
                 'message' => 'District Information Successfully'
@@ -79,6 +97,38 @@ class PatientController extends Controller
             return response()->json([
                 'status' => $status,
                 'District' => $District,
+            ]);
+        }catch (Exception $e) {
+            throw new Exception($e->getMessage());
+        }  
+        return $this->responseJson(false, HttpResponse::HTTP_BAD_GATEWAY, 'Error. Could Not Sava Patient data');
+    }
+    public function upazilla(Request $request){
+        try{
+            $Upazila = Upazila::select('id','name')->where('district_id','=',$request->district_id)->get();
+            $status = [
+                'code' => 200,
+                'message' => 'Upazila Information Successfully'
+            ];
+            return response()->json([
+                'status' => $status,
+                'Upazila' => $Upazila,
+            ]);
+        }catch (Exception $e) {
+            throw new Exception($e->getMessage());
+        }  
+        return $this->responseJson(false, HttpResponse::HTTP_BAD_GATEWAY, 'Error. Could Not Sava Patient data');
+    }
+    public function union(Request $request){
+        try{
+            $Union = Union::select('id','name')->where('upazilla_id','=',$request->upazilla_id)->get();
+            $status = [
+                'code' => 200,
+                'message' => 'Union Information Successfully'
+            ];
+            return response()->json([
+                'status' => $status,
+                'Union' => $Union,
             ]);
         }catch (Exception $e) {
             throw new Exception($e->getMessage());
@@ -101,22 +151,7 @@ class PatientController extends Controller
         }  
         return $this->responseJson(false, HttpResponse::HTTP_BAD_GATEWAY, 'Error. Could Not Sava Patient data');
     }
-    public function Union(){
-        try{
-            $Union = Union::select('UnionName','ShortName')->get();
-            $status = [
-                'code' => 200,
-                'message' => 'Get Union Information'
-            ];
-            return response()->json([
-                'status' => $status,
-                'unions' => $Union,
-            ]);
-        }catch (Exception $e) {
-            throw new Exception($e->getMessage());
-        }  
-        return $this->responseJson(false, HttpResponse::HTTP_BAD_GATEWAY, 'Error. Could Not Found data');
-    }
+    
 
     public function patientRegCreate(Request $request){
 

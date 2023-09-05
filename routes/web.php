@@ -27,14 +27,18 @@ Route::group(['prefix' => 'api'], function ($router) {
     Route::post('login', 'AuthController@login');
     Route::get('genders', 'PatientController@genders'); //genders get
     Route::get('marital-status', 'PatientController@maritalStatus'); //marital status get
-    Route::get('district', 'PatientController@district');//district get
+    
     Route::get('self-type', 'PatientController@SelfType'); //self type get
-    Route::get('union', 'PatientController@Union'); //self type get
     Route::post('patient-reg-create', 'PatientController@patientRegCreate'); //patient post
     Route::post('patient-show', 'PatientController@patientIdWiseInformation'); //patient post
     Route::put('patient-photo', 'PatientController@patientPhoto'); //patient post
     Route::get('patient-allInfo', 'PatientController@patientAllInfo'); //patient post
     Route::post('registration-code-check', 'PatientController@registrationCodeCheck');
+
+   // Route::get('division', 'PatientController@division');//district get
+    Route::get('district', 'PatientController@district');//district get
+    Route::get('upazilla', 'PatientController@upazilla');//district get
+    Route::get('union', 'PatientController@union');
 
     //patient search
     Route::post('search-patient-info', 'SearchPatientController@searchPatientAllInfo');

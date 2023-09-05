@@ -7,11 +7,7 @@ use App\Models\BarcodeFormat;
 
 class Union extends Model
 {
-    protected $table = 'Union';
+    protected $table = 'unions';
     public $timestamps = false;
 
-
-    public function barcodeformat(){
-        return $this->belongsTo(BarcodeFormat::class, 'barcode_union', 'Id');
-    }
 }

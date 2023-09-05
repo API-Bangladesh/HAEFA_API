@@ -166,7 +166,7 @@ class Station4AController extends Controller
                 $SocialBehavior->CollectionDate = $DateTime;
                 $SocialBehavior->SocialBehaviorId = $SocialHistory[$i]['socialBehaviorId'];
                 $SocialBehavior->OtherSocialBehavior = $SocialHistory[$i]['otherSocialBehavior'];
-                $SocialBehavior->Status = "A";
+                $SocialBehavior->Status = $SocialHistory[$i]['Status'];
                 $SocialBehavior->CreateUser = $SocialHistory[$i]['CreateUser'];
                 $SocialBehavior->CreateDate = $DateTime;
                 $SocialBehavior->UpdateUser = "";

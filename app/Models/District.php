@@ -7,10 +7,7 @@ use App\Models\BarcodeFormat;
 
 class District extends Model
 {
-    protected $table = 'District';
+    protected $table = 'districts';
     public $timestamps = false;
 
-    public function barcodeformat(){
-        return $this->belongsTo(BarcodeFormat::class, 'barcode_district', 'Id');
-    }
 }

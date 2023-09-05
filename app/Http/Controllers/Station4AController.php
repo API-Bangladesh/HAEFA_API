@@ -148,7 +148,7 @@ class Station4AController extends Controller
                 $FamilyIll->CollectionDate = $DateTime;
                 $FamilyIll->IllnessId = $FamilyIllness[$i]['illnessId'];
                 $FamilyIll->OtherIllness = $FamilyIllness[$i]['otherIllness'];
-                $FamilyIll->Status = "A";
+                $FamilyIll->Status = $FamilyIllness[$i]['Status'];
                 $FamilyIll->CreateUser = $FamilyIllness[$i]['CreateUser'];
                 $FamilyIll->CreateDate = $DateTime;
                 $FamilyIll->UpdateUser = "";
@@ -188,7 +188,7 @@ class Station4AController extends Controller
                 $VariousSymptom->LGERF = $TBScreening[$i]['LGERF'];
                 $VariousSymptom->NightSweat = $TBScreening[$i]['nightSweat'];
                 $VariousSymptom->WeightLoss = $TBScreening[$i]['weightLoss'];
-                $VariousSymptom->Status = "A";
+                $VariousSymptom->Status = $TBScreening[$i]['Status'];
                 $VariousSymptom->CreateUser = $TBScreening[$i]['CreateUser'];
                 $VariousSymptom->CreateDate = $DateTime;
                 $VariousSymptom->UpdateUser = "";
@@ -217,7 +217,7 @@ class Station4AController extends Controller
                 $ExamGeneral->LungsWithNAD = $GeneralExamination[$i]['lungsWithNAD'];
                 $ExamGeneral->OtherSymptom = $GeneralExamination[$i]['otherSymptom'];
                 $ExamGeneral->Cyanosis = $GeneralExamination[$i]['cyanosis'];
-                $ExamGeneral->Status = "A";
+                $ExamGeneral->Status = $GeneralExamination[$i]['Status'];
                 $ExamGeneral->CreateUser = $GeneralExamination[$i]['CreateUser'];
                 $ExamGeneral->CreateDate = $DateTime;
                 $ExamGeneral->UpdateUser = "";
@@ -234,7 +234,7 @@ class Station4AController extends Controller
                 $SystemicExamination->PatientId = $SystemicExam[$i]['PatientId'];
                 $SystemicExamination->CollectionDate = $DateTime;
                 $SystemicExamination->PhysicalFinding = $SystemicExam[$i]['physicalFinding'];
-                $SystemicExamination->Status = "A";
+                $SystemicExamination->Status = $SystemicExam[$i]['Status'];
                 $SystemicExamination->CreateUser = $SystemicExam[$i]['CreateUser'];
                 $SystemicExamination->CreateDate = $DateTime;
                 $SystemicExamination->UpdateUser = "";
@@ -276,7 +276,7 @@ class Station4AController extends Controller
                 $PatientQuestionAnswer->AnswerId = $MentalHealth[$i]['answerId'];
                 $PatientQuestionAnswer->CreateUser = $MentalHealth[$i]['CreateUser'];
                 $PatientQuestionAnswer->CreateDate = $DateTime;
-                $PatientQuestionAnswer->Status = "A";
+                $PatientQuestionAnswer->Status = $MentalHealth[$i]['Status'];
                 $PatientQuestionAnswer->UpdateUser = "";
                 $PatientQuestionAnswer->UpdateDate =  $DateTime;
                 $PatientQuestionAnswer->OrgId = $MentalHealth[$i]['OrgId'];
@@ -293,7 +293,7 @@ class Station4AController extends Controller
                 $PatientVaccine->VaccineId = $ChildVaccination[$i]['vaccineId'];
                 $PatientVaccine->OtherVaccine = $ChildVaccination[$i]['otherVaccine'];
                 $PatientVaccine->IsGivenByNirog = $ChildVaccination[$i]['isGivenByNirog'];
-                $PatientVaccine->Status = "A";
+                $PatientVaccine->Status = $ChildVaccination[$i]['Status'];
                 $PatientVaccine->CreateUser = $ChildVaccination[$i]['CreateUser'];
                 $PatientVaccine->CreateDate = $DateTime;
                 $PatientVaccine->UpdateUser = "";
@@ -312,7 +312,7 @@ class Station4AController extends Controller
                 $AdultVaccine->VaccineId = $AdultVaccination[$i]['vaccineId'];
                 $AdultVaccine->OtherVaccine = $AdultVaccination[$i]['otherVaccine'];
                 $AdultVaccine->IsGivenByNirog = $AdultVaccination[$i]['isGivenByNirog'];
-                $AdultVaccine->Status = "A";
+                $AdultVaccine->Status = $AdultVaccination[$i]['Status'];
                 $AdultVaccine->CreateUser = $AdultVaccination[$i]['CreateUser'];
                 $AdultVaccine->CreateDate = $DateTime;
                 $AdultVaccine->UpdateUser = "";

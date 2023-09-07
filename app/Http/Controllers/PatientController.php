@@ -224,6 +224,7 @@ class PatientController extends Controller
         $address->Thana = $request->addressInfo['Thana'];
         $address->PostCode = $request->addressInfo['PostCode'];
         $address->District = $request->addressInfo['District'];
+        $address->UnionId = $request->addressInfo['Union'];
         $address->Country = $request->addressInfo['Country'];
         $address->AddressLine1Parmanent = $request->addressInfo['AddressLine1Parmanent'];
         $address->AddressLine2Parmanent = $request->addressInfo['AddressLine2Parmanent'];
@@ -231,6 +232,7 @@ class PatientController extends Controller
         $address->ThanaParmanent = $request->addressInfo['ThanaParmanent'];
         $address->PostCodeParmanent = $request->addressInfo['PostCodeParmanent'];
         $address->DistrictParmanent = $request->addressInfo['DistrictParmanent'];
+        $address->UnionIdParmanent = $request->addressInfo['UnionParmanent'];
         $address->CountryParmanent = $request->addressInfo['CountryParmanent'];
         $address->Camp = $request->addressInfo['Camp'];
         $address->BlockNumber = $request->addressInfo['BlockNumber'];

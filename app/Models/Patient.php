@@ -29,7 +29,7 @@ class Patient extends Model
     
     public function Address()
     {
-        return $this->hasOne(Address::class, 'PatientId', 'PatientId'); 
+        return $this->hasOne(Address::class, 'PatientId', 'PatientId')->with('districtAddress','upazillaAddress','unionAddress'); 
     }
     public function Gender()
     {

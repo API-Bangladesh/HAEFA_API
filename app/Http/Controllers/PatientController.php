@@ -159,6 +159,7 @@ class PatientController extends Controller
         $usersID=$request->patientInfo['usersID'];
         $createUser=$request->patientInfo['CreateUser'];
         $OrgId=$request->patientInfo['OrgId'];
+        DB::beginTransaction();
         try{
 
         $currentTime = Carbon::now();
@@ -247,7 +248,7 @@ class PatientController extends Controller
         $address->UpdateUser = "";
         $address->save();
         //address start
-
+        DB::commit(); 
         return response()->json([
             'message' => 'Patient Registration Sava Successfully',
             'code'=>200,
@@ -255,6 +256,7 @@ class PatientController extends Controller
         ],200);
 
         }catch (Exception $e) {
+            DB::rollBack();
             throw new Exception($e->getMessage());
             return response()->json(['error' => $e->getMessage()], 400);
         }  

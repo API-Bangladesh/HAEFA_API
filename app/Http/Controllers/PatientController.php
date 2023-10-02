@@ -212,7 +212,8 @@ class PatientController extends Controller
         $station->save();
         // //station End
 
-        BarcodeStatus::where('mdata_barcode_prefix_number','=',$registrationNo)->update(['mdata_barcode_status' => 'used']);
+        BarcodeStatus::where('mdata_barcode_prefix_number','=',$registrationNo)->update(['mdata_barcode_status' => 'used',
+    'updated_at' => $date]);
         
         
         // //address start

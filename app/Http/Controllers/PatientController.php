@@ -12,6 +12,9 @@ use App\Models\Gender;
 use App\Models\MaritalStatus;
 use App\Models\District;
 use App\Models\SelfType;
+use App\Models\Religion;
+use App\Models\Education;
+use App\Models\HeadofFamily;
 use Illuminate\Support\Facades\DB;
 use App\Models\Address;
 use App\Models\Station;
@@ -140,7 +143,7 @@ class PatientController extends Controller
             $SelfType = SelfType::select('HeadOfFamilyId','HeadOfFamilyCode')->get();
             $status = [
                 'code' => 200,
-                'message' => 'District Information Successfully'
+                'message' => 'SelfType Information Successfully'
             ];
             return response()->json([
                 'status' => $status,
@@ -150,6 +153,54 @@ class PatientController extends Controller
             throw new Exception($e->getMessage());
         }  
         return $this->responseJson(false, HttpResponse::HTTP_BAD_GATEWAY, 'Error. Could Not Sava Patient data');
+    }
+    public function HeadofFamily(){
+        try{
+            $HeadofFamily = HeadofFamily::select('HeadOfFamilyId','HeadOfFamilyCode')->get();
+            $status = [
+                'code' => 200,
+                'message' => 'Head of Family Information Successfully'
+            ];
+            return response()->json([
+                'status' => $status,
+                'HeadofFamily' => $HeadofFamily,
+            ]);
+        }catch (Exception $e) {
+            throw new Exception($e->getMessage());
+        }  
+        return $this->responseJson(false, HttpResponse::HTTP_BAD_GATEWAY, 'Error. Could Not Found data');
+    }
+    public function Religion(){
+        try{
+            $Religion = Religion::select('ReligionId','ReligionCode')->get();
+            $status = [
+                'code' => 200,
+                'message' => 'Religion Information Successfully'
+            ];
+            return response()->json([
+                'status' => $status,
+                'Religion' => $Religion,
+            ]);
+        }catch (Exception $e) {
+            throw new Exception($e->getMessage());
+        }  
+        return $this->responseJson(false, HttpResponse::HTTP_BAD_GATEWAY, 'Error. Could Not Found data');
+    }
+    public function Education(){
+        try{
+            $Education = Education::select('EducationId','EducationCode')->get();
+            $status = [
+                'code' => 200,
+                'message' => 'Education Information Successfully'
+            ];
+            return response()->json([
+                'status' => $status,
+                'Education' => $Education,
+            ]);
+        }catch (Exception $e) {
+            throw new Exception($e->getMessage());
+        }  
+        return $this->responseJson(false, HttpResponse::HTTP_BAD_GATEWAY, 'Error. Could Not Found data');
     }
     
 

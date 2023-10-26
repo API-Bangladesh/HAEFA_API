@@ -134,6 +134,8 @@ Route::group(['prefix' => 'api'], function ($router) {
 
      Route::get('tb_past_history', 'TBController@TBPastHistory'); //TBEPastEvidenced get
 
+     Route::get('tb_cat', 'TBController@TBCatData'); //TBEPastEvidenced get
+
 
     
 });

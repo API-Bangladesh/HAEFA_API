@@ -85,6 +85,20 @@ class TBController extends Controller
             return response()->json(['status' => $status]);
         }
     }
+
+    public function TBCatData(Request $request){
+
+        $TBCatData= DB::select("SELECT RD.DrugCode AS DrugCode,RC.Frequency, RC.Hour, RC.DrugDurationValue,RC.DrugDose,RC.OtherDrug,RC.SpecialInstruction,RC.Comment1,RC.Comment2,RC.CatMedicineStatus,RC.CreateDate AS CreateDate
+            FROM RefCat as RC
+            INNER JOIN RefDrug as RD on RD.DrugId = RC.DrugId
+            WHERE CatType = '$request->CatType'");
+
+        return response()->json([
+            'message' => 'TB Cat All Data',
+            'code'=>200,
+            'TBCatData'=>$TBCatData,
+        ],200);
+    }
     
 
 

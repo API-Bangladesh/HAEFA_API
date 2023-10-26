@@ -194,6 +194,40 @@ class PrescriptionPreviewController extends Controller
 
         $RxTaken= DB::select("SELECT Rx, RxDurationValue, AllergyToMedication, Dose, FrequencyHour, Status, CreateDate FROM MDataRxDetails WHERE PatientId = '$request->patientId'");
 
+        $PatientPresentllness= DB::select("SELECT RI.IllnessCode AS IllnessCode, PH.Status AS Illness_status, PH.CreateDate AS CreateDate
+            FROM MDataPatientIllnessHistory as PH
+            INNER JOIN RefIllness as RI on RI.IllnessId = PH.IllnessId
+            WHERE PatientId = '$request->patientId'");
+
+        $PatientPastllness= DB::select("SELECT RI.IllnessCode AS IllnessCode, PHP.Status AS Illness_status, PHP.CreateDate AS CreateDate
+            FROM MDataPatientIllnessHistoryPast as PHP
+            INNER JOIN RefIllness as RI on RI.IllnessId = PHP.IllnessId
+            WHERE PatientId = '$request->patientId'");
+        $PatientFamilyllness= DB::select("SELECT RI.IllnessCode AS IllnessCode, PF.Status AS family_status, PF.CreateDate AS CreateDate
+            FROM MDataFamilyIllnessHistory as PF
+            INNER JOIN RefIllness as RI on RI.IllnessId = PF.IllnessId
+            WHERE PatientId = '$request->patientId'");
+        $PatientSocialBehavior= DB::select("SELECT RSB.SocialBehaviorCode AS SocialBehaviorCode,SB.OtherSocialBehavior, SB.Status AS family_status, SB.CreateDate AS CreateDate
+            FROM MDataSocialBehavior as SB
+            INNER JOIN RefSocialBehavior as RSB on RSB.SocialBehaviorId = SB.SocialBehaviorId
+            WHERE PatientId = '$request->patientId'");
+        $PatientVaccine= DB::select("SELECT RV.VaccineCode AS VaccineCode,PV.OtherVaccine, PV.Status AS Vaccine_status_type, PV.CreateDate AS CreateDate
+            FROM MDataPatientVaccine as PV
+            INNER JOIN RefVaccine as RV on RV.VaccineId = PV.VaccineId
+            WHERE PatientId = '$request->patientId'");
+
+        $Obstetrics= DB::select("SELECT Para, Gravida, StillBirth, MiscarraigeOrAbortion, MR, LivingBirth,LivingMale,LivingFemale,CreateDate FROM MDataPatientObsGynae WHERE PatientId = '$request->patientId'");
+
+        $ChildMortality= DB::select("SELECT ChildMortality0To1, ChildMortalityBelow5, ChildMortalityOver5,CreateDate FROM MDataPatientObsGynae WHERE PatientId = '$request->patientId'");
+
+        $MenstrualHistory= DB::select("SELECT RPT.MenstruationProductUsageTimeCode AS MenstruationProductUsageTimeCode,RMP.MenstruationProductCode AS MenstruationProductCode, RCM.ContraceptionMethodCode AS ContraceptionMethodCode,OG.LMP,OG.Comment, OG.CreateDate AS CreateDate
+            FROM MDataPatientObsGynae as OG
+            INNER JOIN RefMnstProductUsageTime as RPT on RPT.MenstruationProductUsageTimeId = OG.MenstruationProductUsageTimeId
+            INNER JOIN RefMenstruationProduct as RMP on RMP.MenstruationProductId = OG.MenstruationProductId
+            INNER JOIN RefContraceptionMethod as RCM on RCM.ContraceptionMethodId = OG.ContraceptionMethodId
+            WHERE PatientId = '$request->patientId'");
+        
+
 
         return response()->json([
             'message' => 'Prescription Preview All Data',
@@ -205,6 +239,14 @@ class PrescriptionPreviewController extends Controller
             'GeneralFindings'=>$GeneralFindings,
             'PhysicalFindings'=>$PhysicalFindings,
             'RxTaken'=>$RxTaken,
+            'PatientPresentllness'=>$PatientPresentllness,
+            'PatientPastllness'=>$PatientPastllness,
+            'PatientFamilyllness'=>$PatientFamilyllness,
+            'PatientSocialBehavior'=>$PatientSocialBehavior,
+            'PatientVaccine'=>$PatientVaccine,
+            'Obstetrics'=>$Obstetrics,
+            'ChildMortality'=>$ChildMortality,
+            'MenstrualHistory'=>$MenstrualHistory,
         ],200);
     }
 }

@@ -156,38 +156,6 @@ class PrescriptionPreviewController extends Controller
         $Complaints= DB::select("SELECT ChiefComplain, CreateDate
         FROM MDataPatientCCDetails WHERE PatientId = '$request->patientId'");
 
-
-    //    $Investigation= DB::select("SELECT  RI.Investigation AS Investigation, I.OtherInvestigation AS OtherInvestigation, I.CreateDate AS CreateDate
-    //         FROM MDataInvestigation as I
-    //         INNER JOIN RefLabInvestigation as RI on RI.RefLabInvestigationId = I.InvestigationId
-    //         WHERE PatientId = '$request->patientId'");
-
-
-        // $Treatment= DB::select("SELECT T.Frequency AS Frequency, T.DrugDurationValue AS DrugDurationValue,T.OtherDrug AS OtherDrug, Dr.DrugCode AS DrugCode, Dr.DrugDose AS DrugDose, Ins.InstructionInBangla AS InstructionInBangla, T.CreateDate AS CreateDate
-        //     FROM MDataTreatmentSuggestion as T
-        //     INNER JOIN RefDrug as Dr on Dr.DrugId = T.DrugId
-        //     INNER JOIN RefInstruction as Ins on Ins.RefInstructionId = T.RefInstructionId
-        //     WHERE PatientId = '$request->patientId'");
-
-
-        // $Advice= DB::select("SELECT RA.AdviceInBangla AS AdviceInBangla, RA.AdviceInEnglish AS AdviceInEnglish, A.CreateDate AS CreateDate
-        //     FROM MDataAdvice as A
-        //     INNER JOIN RefAdvice as RA on RA.AdviceId = A.AdviceId
-        //     WHERE PatientId = '$request->patientId'");
-
-
-        // $PatientReferral= DB::select("SELECT RR.Description AS Description, HC.HealthCenterName AS HealthCenterName, PR.CreateDate AS CreateDate
-        //     FROM MDataPatientReferral as PR
-        //     INNER JOIN RefReferral as RR on RR.RId = PR.RId
-        //     INNER JOIN HealthCenter as HC on HC.HealthCenterId = PR.HealthCenterId
-        //     WHERE PatientId = '$request->patientId'");
-
-        
-
-        // $FollowUpDate= DB::select("SELECT FD. FollowUpDate AS FollowUpDate, FD.Comment AS Comment, FD.CreateDate AS CreateDate
-        //     FROM MDataFollowUpDate as FD
-        //     WHERE PatientId = '$request->patientId'");
-
         $GeneralFindings= DB::select("SELECT AnemiaSeverity, JaundiceSeverity, EdemaSeverity, IsLymphNodesWithPalpable, LymphNodesWithPalpableSite, LymphNodesWithPalpable,LymphNodesWithPalpableSize,IsHeartWithNAD,HeartWithNAD,IsLungsWithNAD,LungsWithNAD,OtherSymptom,Cyanosis,CreateDate FROM MDataPhysicalExamGeneral WHERE PatientId = '$request->patientId'");
 
         $PhysicalFindings= DB::select("SELECT PhysicalFinding, CreateDate FROM MDataPhysicalFinding WHERE PatientId = '$request->patientId'");
@@ -230,7 +198,7 @@ class PrescriptionPreviewController extends Controller
 
 
         return response()->json([
-            'message' => 'Prescription Preview All Data',
+            'message' => 'Patient History All Data',
             'code'=>200,
             'HeightWeight'=>$HeightWeight,
             'BP'=>$BP,

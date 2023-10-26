@@ -124,7 +124,15 @@ Route::group(['prefix' => 'api'], function ($router) {
 
      Route::post('prescription','PrescriptionController@prescription');
 
-     //Prescription Preview End
+     //TBSymptom Preview End
+
+     Route::get('tb_symptom', 'TBController@TBSymptom'); //TBSymptom get
+
+     Route::get('tb_eFinding', 'TBController@TBEFinding'); //TBSymptom get
+
+     Route::get('tb_past_evidenced', 'TBController@TBEPastEvidenced'); //TBEPastEvidenced get
+
+     Route::get('tb_past_history', 'TBController@TBPastHistory'); //TBEPastEvidenced get
 
 
     

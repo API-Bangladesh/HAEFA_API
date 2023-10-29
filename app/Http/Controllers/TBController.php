@@ -97,7 +97,9 @@ class TBController extends Controller
             FROM RefCat as RC
             INNER JOIN RefDrug as RD on RD.DrugId = RC.DrugId
             INNER JOIN RefInstruction as RIS on RIS.RefInstructionId = RC.SpecialInstruction
-            WHERE CatType = '$request->CatType'");
+            WHERE CatType = '$request->CatType'
+            Order By Comment2 ASC 
+            ");
 
         return response()->json([
             'message' => 'TB Cat All Data',

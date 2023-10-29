@@ -124,17 +124,21 @@ Route::group(['prefix' => 'api'], function ($router) {
 
      Route::post('prescription','PrescriptionController@prescription');
 
-     //TBSymptom Preview End
+     //TB Module Start
 
      Route::get('tb_symptom', 'TBController@TBSymptom'); //TBSymptom get
 
-     Route::get('tb_eFinding', 'TBController@TBEFinding'); //TBSymptom get
+     Route::get('tb_eFinding', 'TBController@TBEFinding'); //TBFinding get
 
      Route::get('tb_past_evidenced', 'TBController@TBEPastEvidenced'); //TBEPastEvidenced get
 
-     Route::get('tb_past_history', 'TBController@TBPastHistory'); //TBEPastEvidenced get
+     Route::get('tb_past_history', 'TBController@TBPastHistory'); //TB E Past history get
 
-     Route::get('tb_cat', 'TBController@TBCatData'); //TBEPastEvidenced get
+     Route::get('tb_cat', 'TBController@TBCatData'); //TB CAT get
+
+     Route::post('patient-tb-create','TBController@patientTBCreate'); //TB Create
+
+     //TB Module End
 
 
     

@@ -147,6 +147,7 @@ class Station4AController extends Controller
                 $FamilyIll->IllFamilyMemberId = $FamilyIllness[$i]['illFamilyMemberId'];
                 $FamilyIll->CollectionDate = $DateTime;
                 $FamilyIll->IllnessId = $FamilyIllness[$i]['illnessId'];
+                $FamilyIll->OtherIllFamilyMember = $FamilyIllness[$i]['OtherIllFamilyMember'];
                 $FamilyIll->OtherIllness = $FamilyIllness[$i]['otherIllness'];
                 $FamilyIll->Status = $FamilyIllness[$i]['Status'];
                 $FamilyIll->CreateUser = $FamilyIllness[$i]['CreateUser'];

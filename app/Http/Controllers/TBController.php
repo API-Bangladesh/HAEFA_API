@@ -74,7 +74,7 @@ class TBController extends Controller
     }
     public function TBPastHistory(){
         try{
-           $data = RefTBPastHistory::select('TBHistoryId','TBHistoryIdCode')->orderBy('SortOrder', 'asc')->get();
+           $data = RefTBPastHistory::select('TBHistoryId','TBHistoryIdCode','TBPastHistoryQuestion','TBPastHistoryAnswer1','TBPastHistoryAnswer2')->orderBy('SortOrder', 'asc')->get();
 
            $status = [
             'code'=> 200,

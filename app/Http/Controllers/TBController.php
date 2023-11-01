@@ -172,6 +172,7 @@ class TBController extends Controller
                 $TBEvidence->CollectionDate  = $DateTime;
                 $TBEvidence->TBEPastEvidencedId  = $TBEvidences[$i]['TBEPastEvidencedId'];//
                 $TBEvidence->TBEPastEvidencedCode  = $TBEvidences[$i]['TBEPastEvidencedCode'];//
+                $TBEvidence->TBEPastEvidencedOthers  = $TBEvidences[$i]['TBEPastEvidencedOthers'];
                 $TBEvidence->Status  = $TBEvidences[$i]['Status'];
                 $TBEvidence->CreateDate  = $DateTime;
                 $TBEvidence->CreateUser  = $TBEvidences[$i]['CreateUser'];
@@ -192,6 +193,7 @@ class TBController extends Controller
                 $TBPastHistory->TBPastHistoryQuestionId  = $TBPastHistories[$i]['TBPastHistoryQuestionId'];//
                 $TBPastHistory->TBHistoryAnswer1  = $TBPastHistories[$i]['TBHistoryAnswer1'];//
                 $TBPastHistory->TBHistoryOthers1  = $TBPastHistories[$i]['TBHistoryOthers1'];//
+                $TBPastHistory->TBHistoryOthers2  = $TBPastHistories[$i]['TBHistoryOthers2'];//
                 $TBPastHistory->Status  = $TBPastHistories[$i]['Status'];
                 $TBPastHistory->CreateDate  = $DateTime;
                 $TBPastHistory->CreateUser  = $TBPastHistories[$i]['CreateUser'];

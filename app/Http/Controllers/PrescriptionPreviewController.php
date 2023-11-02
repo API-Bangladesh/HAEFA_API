@@ -141,10 +141,10 @@ class PrescriptionPreviewController extends Controller
 
         
 
-        $HeightWeight= DB::select("SELECT Height, Weight, BMI, BMIStatus, CreateDate
+        $HeightWeight= DB::select("SELECT Height, Weight, BMI, BMIStatus,MUAC,MUACStatus, CreateDate
             FROM MDataHeightWeight WHERE PatientId = '$request->patientId'");
         
-        $BP= DB::select("SELECT BPSystolic1, BPDiastolic1, BPSystolic2, BPDiastolic2, HeartRate, CurrentTemparature, CreateDate
+        $BP= DB::select("SELECT BPSystolic1, BPDiastolic1, BPSystolic2, BPDiastolic2, HeartRate,CurrentTemparature,RespiratoryRate,SpO2Rate,IndicatesNormalOxygenSaturation, CurrentTemparature, CreateDate
             FROM MDataBP WHERE PatientId = '$request->patientId'");
         
         $GlucoseHb = DB::select("SELECT RBG, FBG, Hemoglobin, HrsFromLastEat, CreateDate

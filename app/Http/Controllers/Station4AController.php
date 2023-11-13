@@ -177,26 +177,24 @@ class Station4AController extends Controller
             }
 
             //Save TB Screening
-            $TBScreening = $request->TBScreening;
-            for($i=0;$i<count($TBScreening); $i++){
-                $VariousSymptom = new MDataVariousSymptom();
-                $VariousSymptom->MDVariousSymptomId = Str::uuid();
-                $VariousSymptom->PatientId = $TBScreening[$i]['PatientId'];
-                $VariousSymptom->CollectionDate = $DateTime;
-                $VariousSymptom->AnemiaSeverityId = $TBScreening[$i]['AnemiaSeverityId'];
-                $VariousSymptom->AnemiaSeverity = $TBScreening[$i]['AnemiaSeverity'];
-                $VariousSymptom->CoughGreaterThanMonth = $TBScreening[$i]['coughGreaterThanMonth'];
-                $VariousSymptom->LGERF = $TBScreening[$i]['LGERF'];
-                $VariousSymptom->NightSweat = $TBScreening[$i]['nightSweat'];
-                $VariousSymptom->WeightLoss = $TBScreening[$i]['weightLoss'];
-                $VariousSymptom->Status = $TBScreening[$i]['Status'];
-                $VariousSymptom->CreateUser = $TBScreening[$i]['CreateUser'];
-                $VariousSymptom->CreateDate = $DateTime;
-                $VariousSymptom->UpdateUser = "";
-                $VariousSymptom->UpdateDate =  $DateTime;
-                $VariousSymptom->OrgId = $TBScreening[$i]['OrgId'];
-                $VariousSymptom->save();
-            }
+            $TBScreening=$request->TBScreening;
+            $VariousSymptom = new MDataVariousSymptom();
+            $VariousSymptom->MDVariousSymptomId = Str::uuid();
+            $VariousSymptom->PatientId = $TBScreening['PatientId'];
+            $VariousSymptom->CollectionDate = $DateTime;
+            $VariousSymptom->AnemiaSeverityId = $TBScreening['AnemiaSeverityId'];
+            $VariousSymptom->AnemiaSeverity = $TBScreening['AnemiaSeverity'];
+            $VariousSymptom->CoughGreaterThanMonth = $TBScreening['coughGreaterThanMonth'];
+            $VariousSymptom->LGERF = $TBScreening['LGERF'];
+            $VariousSymptom->NightSweat = $TBScreening['nightSweat'];
+            $VariousSymptom->WeightLoss = $TBScreening['weightLoss'];
+            $VariousSymptom->Status = $TBScreening['Status'];
+            $VariousSymptom->CreateUser = $TBScreening['CreateUser'];
+            $VariousSymptom->CreateDate = $DateTime;
+            $VariousSymptom->UpdateUser = "";
+            $VariousSymptom->UpdateDate =  $DateTime;
+            $VariousSymptom->OrgId = $TBScreening['OrgId'];
+            $VariousSymptom->save();
             
             //Save General Examination
             $GeneralExamination = $request->GeneralExamination;

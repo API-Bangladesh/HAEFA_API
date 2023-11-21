@@ -194,9 +194,9 @@ class PrescriptionPreviewController extends Controller
             INNER JOIN RefMenstruationProduct as RMP on RMP.MenstruationProductId = OG.MenstruationProductId
             INNER JOIN RefContraceptionMethod as RCM on RCM.ContraceptionMethodId = OG.ContraceptionMethodId
             WHERE PatientId = '$request->patientId'");
+
+        $Cardiovascular= DB::select("SELECT * FROM MDataCRA WHERE PatientId = '$request->patientId'");
         
-
-
         return response()->json([
             'message' => 'Patient History All Data',
             'code'=>200,
@@ -215,6 +215,7 @@ class PrescriptionPreviewController extends Controller
             'Obstetrics'=>$Obstetrics,
             'ChildMortality'=>$ChildMortality,
             'MenstrualHistory'=>$MenstrualHistory,
+            'Cardiovascular'=>$Cardiovascular,
         ],200);
     }
 }

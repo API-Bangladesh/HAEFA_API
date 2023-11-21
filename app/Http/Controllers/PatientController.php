@@ -228,6 +228,7 @@ class PatientController extends Controller
         $patient->IdType = $request->patientInfo['idType'];
         $patient->IdNumber = $request->patientInfo['ID'];
         $patient->MaritalStatusId = $request->patientInfo['MariatalStatus'];
+       
         //new add field
         // $patient->SpouseName = $request->patientInfo['SpouseName'];
         // $patient->ReligionId = $request->patientInfo['ReligionId'];
@@ -242,6 +243,7 @@ class PatientController extends Controller
         //new add field
         $patient->PatientImage = $request->patientInfo['PatientPhoto'];
         $patient->IdOwner = $request->patientInfo['selfType'];
+        $patient->StationStatus = $request->patientInfo['StationStatus'];
         $patient->WorkPlaceId = (string) $request->patientInfo['WorkPlaceId'];
         $patient->WorkPlaceBranchId = (string) $request->patientInfo['WorkPlaceBranchId'];
         $patient->BarCode = (string) $request->patientInfo['BarCodeId'];

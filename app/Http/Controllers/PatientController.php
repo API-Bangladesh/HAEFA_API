@@ -1,29 +1,31 @@
 <?php
 
 namespace App\Http\Controllers;
+use Carbon\Carbon;
+use App\Models\Union;
+use App\Models\Gender;
+use App\Models\Address;
 use App\Models\Patient;
+use App\Models\Station;
+use App\Models\Upazila;
+use App\Models\District;
+use App\Models\Division;
+use App\Models\Religion;
+use App\Models\SelfType;
+use App\Models\Education;
+use App\Models\WorkPlace;
+use App\Models\SyncRecord;
+use Illuminate\Support\Str;
+use App\Models\HeadofFamily;
 use Illuminate\Http\Request;
+use App\Models\BarcodeStatus;
+use App\Models\MaritalStatus;
+use App\Models\RegistrationCode;
+use Illuminate\Support\Facades\DB;
+
+use Illuminate\Support\Facades\Auth;
 use App\Transformers\PatientTransformer;
 use Symfony\Component\HttpFoundation\Response as HttpResponse;
-use Illuminate\Support\Str;
-use Carbon\Carbon;
-use App\Models\WorkPlace;
-use App\Models\Gender;
-use App\Models\MaritalStatus;
-use App\Models\District;
-use App\Models\SelfType;
-use App\Models\Religion;
-use App\Models\Education;
-use App\Models\HeadofFamily;
-use Illuminate\Support\Facades\DB;
-use App\Models\Address;
-use App\Models\Station;
-use App\Models\RegistrationCode;
-use App\Models\Union;
-use App\Models\BarcodeStatus;
-use App\Models\Division;
-use App\Models\Upazila;
-
 
 class PatientController extends Controller
 {
@@ -206,12 +208,18 @@ class PatientController extends Controller
 
     public function patientRegCreate(Request $request){
 
+     
         $registrationNo=$request->patientInfo['RegistrationId'];
         $usersID=$request->patientInfo['usersID'];
         $createUser=$request->patientInfo['CreateUser'];
         $OrgId=$request->patientInfo['OrgId'];
-        DB::beginTransaction();
+
+        $patient_exist=Patient::where('RegistrationId',$registrationNo)->first();
+        if(!$patient_exist){
+
+                     DB::beginTransaction();
         try{
+      
 
         $currentTime = Carbon::now();
         $date=$currentTime->toDateTimeString();
@@ -278,6 +286,51 @@ class PatientController extends Controller
         $station->save();
         // //station End
 
+  
+          
+       
+        $hostname = gethostname();
+        
+        $rawMacAddress = exec("getmac");
+        $macAddress = $this->extractMacAddress($rawMacAddress);
+        
+         preg_match('/^[A-Za-z]+/', $registrationNo, $stringPortion);
+          $prefix_code= $stringPortion[0];
+         $registrationNo=$request->patientInfo['RegistrationId'];
+         $user_email=$request->userEmail;
+    
+
+    
+       
+        $syncdate = Carbon::now()->toDateTimeString();
+
+        // Check if there are more than 200 records for the given prefix
+        $count = SyncRecord::where('WorkPlaceId', $prefix_code)->count();
+
+        if ($count >= 200) {
+            // Sort records by OperationDate in ascending order and delete oldest records
+            $oldestRecords = SyncRecord::where('WorkPlaceId', $prefix_code)->orderBy('OperationDate')->take($count - 199)->get();
+            foreach ($oldestRecords as $record) {
+                $record->delete();
+            }
+        }
+
+        // Create new SyncRecord
+        SyncRecord::create([
+            'DownloadUploadIndicator' => $hostname,
+            'IPAddress' => $macAddress,
+            'OperationDate' => $syncdate,
+            'CreateUser' => $user_email,
+            'UpdateUser' => $user_email,
+            'CreateDate' => $syncdate,
+            'UpdateDate' => $syncdate,
+            'WorkPlaceId' => $prefix_code,
+        ]);
+      
+        // $mac_address=$request->macAddress;
+        // $device_name=$request->deviceName;
+        // $cc_prefix=Auth()
+
         BarcodeStatus::where('mdata_barcode_prefix_number','=',$registrationNo)->update(['mdata_barcode_status' => 'used',
     'updated_at' => $date]);
         
@@ -326,6 +379,19 @@ class PatientController extends Controller
             throw new Exception($e->getMessage());
             return response()->json(['error' => $e->getMessage()], 400);
         }  
+               
+        
+            }else{
+
+            return $this->responseJson(false, HttpResponse::HTTP_BAD_GATEWAY, 'Error. Patient ALready Exist');
+      
+    }
+    
+      
+      
+        // return $hostname;
+        
+     
 
         return $this->responseJson(false, HttpResponse::HTTP_BAD_GATEWAY, 'Error. Could Not Sava Patient Registration data');
     }
@@ -380,14 +446,27 @@ class PatientController extends Controller
             'patientAllInfo' => $patientAllInfo,
         ]);
     }
+        private function extractMacAddress($rawMacAddress)
+{
+    // Use regular expressions to extract the MAC address
+    // Use regular expressions to extract the MAC address without leading/trailing spaces
+    $pattern = '/([0-9A-Fa-f:-]+)/';
+    preg_match($pattern, $rawMacAddress, $matches);
+    if (isset($matches[1])) {
+        return trim($matches[1]); // Trim any leading/trailing spaces
+    } else {
+        return 'Unknown';
+    }
+}
 
     public function registrationCodeCheck(Request $request){
 
+        
 
         preg_match('/^[A-Za-z]+/', $request->registrationCode, $stringPortion);
         // Extract the number portion
         preg_match('/\d+$/', $request->registrationCode, $numberPortion);
-
+   
         if(isset($stringPortion[0]) && isset($numberPortion[0])){ 
 
             $code= $stringPortion[0]; // Array element at index 0
@@ -396,9 +475,13 @@ class PatientController extends Controller
             $strLength=Str::length($number);
 
             if($strCode == 9 && $strLength == 8){
+                $existCode=RegistrationCode::where('mdata_barcode_prefix_number',$request->registrationCode)->first();
                 $registrationCode = RegistrationCode::select('mdata_barcode_prefix','mdata_barcode_number','mdata_barcode_prefix_number','mdata_barcode_status')->where('mdata_barcode_prefix_number','=',$request->registrationCode)->where('mdata_barcode_status','=','unused')->first();
                 try{
-                    if($registrationCode == null){
+                    if(!$existCode){
+                            return $this->responseJson(false, HttpResponse::HTTP_BAD_REQUEST, 'Invalid Registration Code ');
+                    }
+                    else if($registrationCode == null){
                         return $this->responseJson(false, HttpResponse::HTTP_BAD_REQUEST, 'Registration Code Already Used');
                     }else{
                         return response()->json([
